@@ -15,46 +15,43 @@ import { BotIcon } from "lucide-react";
 import { useChat } from "ai/react";
 
 export function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    api: '/api/chat',
+  });
 
   return (
-    <div>
       <Card className="w-[500px] h-[700px] rounded-2xl grid grid-rows-[min-content]">
         <CardHeader className="flex flex-row justify-between border-b">
           <CardTitle className="flex gap-2">Chatbot</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 flex flex-col gap-2 self-start pt-5">
-          <article className="flex items-center gap-5 justify-start text-sm text-zinc-600">
-            <Avatar className="self-start">
-              <AvatarFallback>JG</AvatarFallback>
-              <AvatarImage src="https://github.com/jaogui.png" />
-            </Avatar>
-            <span className="flex flex-col">
-              <p className="font-semibold">Interação:</p>
-              <p>Desenvolvimento de software?</p>
-            </span>
-          </article>
-          <article className="flex items-center gap-5 justify-start text-sm text-zinc-600">
-            <Avatar className="flex self-start">
-              <AvatarFallback>
-                <BotIcon size={20} color="#000000" strokeWidth={1.5} />
-              </AvatarFallback>
-              <AvatarImage src="https://github.com/openai.png" />
-            </Avatar>
-            <span className="flex flex-col">
-              <p className="font-semibold">Resposta:</p>
-              <p>
-                {" "}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
-                quia. Quisquam atque ipsam doloremque corporis similique quae
-                obcaecati ullam incidunt, nulla a quos possimus autem quod magni
-                neque fuga veniam??
-              </p>
-            </span>
-          </article>
+          {messages.map(message => {
+            return(
+              <article key={message.id} className="flex items-center gap-5 justify-start text-sm text-zinc-600">
+                {message.role === 'user' && (
+                        <Avatar className="self-start">
+                        <AvatarFallback>JG</AvatarFallback>
+                        <AvatarImage src="https://github.com/jaogui.png" />
+                      </Avatar>
+                )}
+                {message.role === 'assistant' && (
+                       <Avatar className="flex self-start">
+                       <AvatarFallback>
+                         <BotIcon size={20} color="#000000" strokeWidth={1.5} />
+                       </AvatarFallback>
+                       <AvatarImage src="https://github.com/openai.png" />
+                     </Avatar>
+                )}
+              <span className="flex flex-col">
+                <p className="font-semibold">{message.role === 'user' ? 'Interação:' : 'IA:'}</p>
+                <p>{message.content}</p>
+              </span>
+            </article>
+            )
+          })}
         </CardContent>
-        <CardFooter className="text-sm self-end">
+        <CardFooter className="text-sm self-end"> 
           <form className="flex gap-2 w-full items-center" onSubmit={handleSubmit}>
           <label>
             <BotIcon size={25} color="#000000" strokeWidth={1.5} />
@@ -73,6 +70,5 @@ export function Chat() {
           </form>
         </CardFooter>
       </Card>
-    </div>
   );
 }
