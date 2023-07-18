@@ -10,7 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { BotIcon } from "lucide-react";
+import { LucideMessagesSquare, BotIcon } from "lucide-react";
 
 import { useChat } from "ai/react";
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -57,7 +57,7 @@ export function Chat() {
         <CardFooter className="text-sm self-end"> 
           <form className="flex gap-2 w-full items-center" onSubmit={handleSubmit}>
           <label>
-            <BotIcon size={25} color="#000000" strokeWidth={1.5} />
+            <LucideMessagesSquare size={25} color="#000000" strokeWidth={1.5} />
           </label>
             <Input
               placeholder="Escreva aqui sua dúvida.."
