@@ -21,13 +21,13 @@ export function Chat() {
   });
 
   return (
-      <Card className="w-[550px]">
+      <Card className="w-full max-w-[550px]">
         <CardHeader className="flex flex-row justify-between border-b">
           <CardTitle className="flex gap-2">Chatbot</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
         <CardContent className="self-start pt-5">
-          <ScrollArea className="h-[700px] rounded-md p-2">
+          <ScrollArea className="h-[600px] rounded-md p-2">
           {messages.map(message => {
             return(
               <article key={message.id} className="flex items-center gap-5 justify-start text-sm text-zinc-600 py-2">
@@ -55,7 +55,7 @@ export function Chat() {
           </ScrollArea>
         </CardContent>
         <CardFooter className="text-sm self-end"> 
-          <form className="flex gap-2 w-full items-center" onSubmit={handleSubmit}>
+          <form className="flex flex-col gap-2 w-full sm:flex-row sm:items-center" onSubmit={handleSubmit}>
           <label>
             <LucideMessagesSquare size={25} color="#000000" strokeWidth={1.5} />
           </label>
