@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { BotIcon } from "lucide-react";
 
 import { useChat } from "ai/react";
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -20,15 +21,16 @@ export function Chat() {
   });
 
   return (
-      <Card className="w-[500px] h-[700px] rounded-2xl grid grid-rows-[min-content]">
+      <Card className="w-[550px]">
         <CardHeader className="flex flex-row justify-between border-b">
           <CardTitle className="flex gap-2">Chatbot</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 flex flex-col gap-2 self-start pt-5">
+        <CardContent className="self-start pt-5">
+          <ScrollArea className="h-[700px] rounded-md p-2">
           {messages.map(message => {
             return(
-              <article key={message.id} className="flex items-center gap-5 justify-start text-sm text-zinc-600">
+              <article key={message.id} className="flex items-center gap-5 justify-start text-sm text-zinc-600 py-2">
                 {message.role === 'user' && (
                         <Avatar className="self-start">
                         <AvatarFallback>JG</AvatarFallback>
@@ -50,6 +52,7 @@ export function Chat() {
             </article>
             )
           })}
+          </ScrollArea>
         </CardContent>
         <CardFooter className="text-sm self-end"> 
           <form className="flex gap-2 w-full items-center" onSubmit={handleSubmit}>
